@@ -1,0 +1,6 @@
+imu_viz:
+  ros__parameters:
+    imu_topic: '/auv0/IMUSensor'
+    # output_topic: ''     # default: <imu_topic>/rviz
+    world_frame: 'map'
+    imu_frame: 'auv0/imu'

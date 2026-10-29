@@ -1,0 +1,61 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Enabled: true
+      Reference Frame: <Fixed Frame>
+      Cell Size: 1
+      Plane Cell Count: 10
+    - Class: rviz_default_plugins/TF
+      Name: TF
+      Enabled: true
+      Show Arrows: false
+      Show Axes: true
+      Show Names: true
+      Marker Scale: 1
+    - Class: rviz_imu_plugin/Imu
+      Name: Imu
+      Enabled: true
+      Topic:
+        Value: /auv0/IMUSensor/rviz
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+      fixed_frame_orientation: true
+      Box properties:
+        Enable box: false
+      Axes properties:
+        Enable axes: false
+      Acceleration properties:
+        Enable acceleration: true
+        Derotate acceleration: false
+        Acc. vector scale: 0.1
+        Acc. vector alpha: 1
+        Acc. vector color: 255; 0; 0
+  Enabled: true
+  Global Options:
+    Background Color: 48; 48; 48
+    Fixed Frame: map
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+  Value: true
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 4
+      Focal Point:
+        X: 0
+        Y: 0
+        Z: 0.3
+      Pitch: 0.4
+      Yaw: 0.8
+      Target Frame: <Fixed Frame>
+    Saved: ~
