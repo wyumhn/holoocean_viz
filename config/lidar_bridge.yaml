@@ -1,0 +1,30 @@
+lidar_bridge:
+  ros__parameters:
+    use_sim_time: true
+    agent_name: 'auv0'
+    # lidar_topic: ''          # default: /<agent>/RaycastLidar
+    # odom_topic: ''           # default: /<agent>/DynamicsSensorOdom
+    # imu_topic: ''            # default: /<agent>/IMUSensor
+    # points_out_topic: ''     # default: /<agent>/lidar/points
+    # imu_out_topic: ''        # default: /<agent>/imu/data
+    world_frame: 'map'
+    input_frame: 'sensor'      # HoloOcean 2.3.0 RaycastLidar returns LiDAR-frame points ('world' if that changes)
+
+    # Mount offsets from the COM: same as "location" / "rotation" in the scenario JSON
+    lidar_xyz: [0.0, 0.0, 0.2]
+    lidar_rpy_deg: [0.0, 0.0, 0.0]
+    imu_xyz: [0.0, 0.0, 0.0]
+    imu_rpy_deg: [0.0, 0.0, 0.0]
+
+    scan_period: 0.1           # 1 / RotationFrequency
+    min_range: 0.3
+    max_range: 100.0
+
+    imu_orientation: 'ground_truth'   # LIO-SAM needs it; 'none' is fine for FAST-LIO2
+    publish_ground_truth: true
+    ground_truth_frame: ''     # default <agent>/base_link_gt (the launch file sets it per SLAM)
+
+    # Overlay SLAM output on ground truth in RViz (overridden by the launch file per SLAM)
+    slam_origin_frame: ''
+    slam_origin_link: 'imu'
+    slam_origin_rotation: true

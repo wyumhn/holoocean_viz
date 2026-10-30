@@ -70,7 +70,11 @@ class SidescanSonarWaterfallEncoder(SensorPublisher):
 
 
 class RaycastLidarEncoder(SensorPublisher):
-    """HoloOcean returns [num_points, 5] = x, y, z (world frame), intensity, ring."""
+    """HoloOcean returns [num_points, 5] = x, y, z (LiDAR frame), intensity, ring.
+
+    The docstring of holoocean.sensors.RaycastLidar says world coordinates, but
+    in HoloOcean 2.3.0 the points are relative to the sensor and rotate with it.
+    """
 
     def __init__(self, sensor_dict):
         super().__init__(sensor_dict)
@@ -86,10 +90,14 @@ class RaycastLidarEncoder(SensorPublisher):
 
     def encode(self, sensor_data):
         points = np.asarray(sensor_data, dtype=np.float32).reshape(-1, 5)
+        if points.shape[0] == 0:
+            # No capture this tick (Hz < ticks_per_sec). holoocean_interface skips
+            # publishing on KeyError, the same as for sensors that did not tick.
+            raise KeyError(self.name)
 
         msg = self.message_type()
-        # Points are already in world coordinates, same frame as DynamicsSensorOdom
-        msg.header.frame_id = 'map'
+        # Sensor-relative points; lidar_bridge publishes the TF for them as <agent>/lidar_link
+        msg.header.frame_id = self.name
         msg.height = 1
         msg.width = points.shape[0]
         msg.fields = self.fields

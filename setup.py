@@ -14,6 +14,8 @@ setup(
         ('share/' + package_name, ['package.xml']),
         (os.path.join('share', package_name, 'launch'), glob(os.path.join('launch', '*launch.[pxy][yma]*'))),
         (os.path.join('share', package_name, 'config'), glob('config/*.yaml')),
+        (os.path.join('share', package_name, 'config', 'scenarios'), glob('config/scenarios/*.json')),
+        (os.path.join('share', package_name, 'config', 'slam'), glob('config/slam/*.yaml')),
         (os.path.join('share', package_name, 'rviz'), glob('rviz/*.rviz')),
     ],
     install_requires=['setuptools'],
@@ -26,6 +28,7 @@ setup(
     entry_points={
         'console_scripts': [
             'imu_viz = holoocean_viz.imu_viz:main',
+            'lidar_bridge = holoocean_viz.lidar_bridge:main',
         ],
         # Extra sensor encoders picked up by holoocean_main at startup
         'holoocean_main.encoders': [

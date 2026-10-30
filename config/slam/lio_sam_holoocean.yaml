@@ -1,0 +1,82 @@
+# LIO-SAM (ros2 branch) parameters for holoocean_viz lidar_bridge output.
+# Only the values that differ from a Velodyne VLP-16 setup are commented.
+# Matches config/scenarios/blueROV_lio.json (16 ch, 10 Hz, 100000 pts/s).
+/**:
+  ros__parameters:
+    use_sim_time: true
+
+    pointCloudTopic: '/auv0/lidar/points'
+    imuTopic: '/auv0/imu/data'      # orientation filled from ground truth by lidar_bridge
+    odomTopic: 'odometry/imu'
+    gpsTopic: 'odometry/gpsz'
+
+    # Keep LIO-SAM's frames apart from holoocean_viz's 'map' (ground truth)
+    lidarFrame: 'auv0/lidar_link'
+    baselinkFrame: 'auv0/base_link'
+    odometryFrame: 'lio_odom'
+    mapFrame: 'lio_map'
+
+    useImuHeadingInitialization: true   # start heading-aligned with the simulator world
+    useGpsElevation: false
+    gpsCovThreshold: 2.0
+    poseCovThreshold: 25.0
+
+    savePCD: false
+    savePCDDirectory: '/Downloads/LOAM/'
+
+    sensor: 'velodyne'
+    N_SCAN: 16                  # = RaycastLidar Channels
+    Horizon_SCAN: 625           # = PointsPerSecond / RotationFrequency / Channels
+    downsampleRate: 1
+    lidarMinRange: 0.3
+    lidarMaxRange: 100.0
+
+    # IMU noise: HoloOcean AccelSigma / AngVelSigma = 0.01
+    imuAccNoise: 0.01
+    imuGyrNoise: 0.01
+    imuAccBiasN: 0.0002
+    imuGyrBiasN: 0.00003
+    imuGravity: 9.81
+    imuRPYWeight: 0.01
+
+    # IMU and LiDAR axes are identical; LiDAR sits 0.2 m above the IMU.
+    # LIO-SAM builds lidar2Imu from extrinsicTrans, i.e. the IMU position seen from the LiDAR.
+    extrinsicTrans: [0.0, 0.0, -0.2]
+    extrinsicRot: [1.0, 0.0, 0.0,
+                   0.0, 1.0, 0.0,
+                   0.0, 0.0, 1.0]
+    extrinsicRPY: [1.0, 0.0, 0.0,
+                   0.0, 1.0, 0.0,
+                   0.0, 0.0, 1.0]
+
+    edgeThreshold: 1.0
+    surfThreshold: 0.1
+    edgeFeatureMinValidNum: 10
+    surfFeatureMinValidNum: 100
+
+    odometrySurfLeafSize: 0.4
+    mappingCornerLeafSize: 0.2
+    mappingSurfLeafSize: 0.4
+
+    z_tollerance: 1000.0
+    rotation_tollerance: 1000.0
+
+    numberOfCores: 4
+    mappingProcessInterval: 0.15
+
+    surroundingkeyframeAddingDistThreshold: 1.0
+    surroundingkeyframeAddingAngleThreshold: 0.2
+    surroundingKeyframeDensity: 2.0
+    surroundingKeyframeSearchRadius: 50.0
+
+    loopClosureEnableFlag: true
+    loopClosureFrequency: 1.0
+    surroundingKeyframeSize: 50
+    historyKeyframeSearchRadius: 15.0
+    historyKeyframeSearchTimeDiff: 30.0
+    historyKeyframeSearchNum: 25
+    historyKeyframeFitnessScore: 0.3
+
+    globalMapVisualizationSearchRadius: 1000.0
+    globalMapVisualizationPoseDensity: 10.0
+    globalMapVisualizationLeafSize: 1.0

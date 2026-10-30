@@ -1,0 +1,116 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Enabled: true
+      Reference Frame: <Fixed Frame>
+      Cell Size: 5
+      Plane Cell Count: 40
+    - Class: rviz_default_plugins/TF
+      Name: TF
+      Enabled: true
+      Show Arrows: false
+      Show Axes: true
+      Show Names: true
+      Marker Scale: 2
+    - Class: rviz_default_plugins/Path
+      Name: Ground truth path
+      Enabled: true
+      Color: 0; 255; 0
+      Line Style: Lines
+      Topic:
+        Value: /auv0/ground_truth/path
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Bridge scan (lidar_link)
+      Enabled: true
+      Color Transformer: Intensity
+      Size (m): 0.05
+      Style: Points
+      Size (Pixels): 2
+      Decay Time: 0
+      Topic:
+        Value: /auv0/lidar/points
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Best Effort
+    - Class: rviz_default_plugins/Path
+      Name: FAST-LIO path
+      Enabled: true
+      Color: 255; 85; 0
+      Line Style: Lines
+      Topic:
+        Value: /path
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+    - Class: rviz_default_plugins/PointCloud2
+      Name: FAST-LIO map
+      Enabled: true
+      Color Transformer: AxisColor
+      Axis: Z
+      Style: Points
+      Size (Pixels): 1
+      Decay Time: 1000
+      Topic:
+        Value: /cloud_registered
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Best Effort
+    - Class: rviz_default_plugins/Path
+      Name: LIO-SAM path
+      Enabled: true
+      Color: 0; 170; 255
+      Line Style: Lines
+      Topic:
+        Value: /lio_sam/mapping/path
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+    - Class: rviz_default_plugins/PointCloud2
+      Name: LIO-SAM map
+      Enabled: true
+      Color Transformer: AxisColor
+      Axis: Z
+      Style: Points
+      Size (Pixels): 1
+      Decay Time: 0
+      Topic:
+        Value: /lio_sam/mapping/map_global
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+  Enabled: true
+  Global Options:
+    Background Color: 48; 48; 48
+    Fixed Frame: map
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+  Value: true
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 40
+      Focal Point:
+        X: 0
+        Y: -700
+        Z: -3
+      Pitch: 0.7
+      Yaw: 0.8
+      Target Frame: <Fixed Frame>
+    Saved: ~

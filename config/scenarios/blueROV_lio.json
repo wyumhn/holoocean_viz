@@ -1,0 +1,69 @@
+{
+    "name": "BlueROV_LIO",
+    "package_name": "Ocean",
+    "world": "PierHarbor",
+    "main_agent": "auv0",
+    "ticks_per_sec": 100,
+    "frames_per_sec": true,
+    "agents": [
+        {
+        "agent_name": "auv0",
+        "agent_type": "BlueROV2",
+        "sensors": [
+            {
+                "sensor_type": "DynamicsSensor",
+                "ros_publish": true,
+                "configuration": {
+                    "UseCOM": true,
+                    "UseRPY": false
+                }
+            },
+            {
+                "sensor_type": "IMUSensor",
+                "ros_publish": true,
+                "socket": "COM",
+                "configuration": {
+                    "AccelSigma": [0.01, 0.01, 0.01],
+                    "AngVelSigma": [0.01, 0.01, 0.01],
+                    "ReturnBias": true
+                }
+            },
+            {
+                "sensor_type": "DVLSensor",
+                "ros_publish": true,
+                "configuration": {
+                    "VelSigma": [0.1, 0.1, 0.1, 0.1]
+                }
+            },
+            {
+                "sensor_type": "DepthSensor",
+                "ros_publish": true,
+                "configuration": {
+                    "Sigma": 0.03
+                }
+            },
+            {
+                "sensor_type": "RaycastLidar",
+                "sensor_name": "RaycastLidar",
+                "ros_publish": true,
+                "socket": "COM",
+                "location": [0, 0, 0.2],
+                "rotation": [0, 0, 0],
+                "Hz": 10,
+                "configuration": {
+                    "Channels": 16,
+                    "Range": 100.0,
+                    "PointsPerSecond": 100000,
+                    "RotationFrequency": 10.0,
+                    "UpperFovLimit": 15.0,
+                    "LowerFovLimit": -15.0,
+                    "HorizontalFov": 360.0
+                }
+            }
+        ],
+        "control_scheme": 0,
+        "location": [0, -700, -3],
+        "rotation": [0, 0, 0]
+        }
+    ]
+}
